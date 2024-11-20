@@ -1,30 +1,60 @@
 //your variable declarations here
 Spaceship bob;
+Star[] sue = new Star[100];
+boolean[] click = new boolean[4];
+double value=0.1;
+
 public void setup() 
 {
   //your code here
   size(600,600);
   bob = new Spaceship();
+  for(int i =0; i<sue.length;i++){
+    sue[i]= new Star();
+  }
 }
 public void draw() 
 {
   //your code here
   background(0);
+  for(int i =0; i<sue.length;i++){
+    sue[i].show();
+  }
   bob.show();
   bob.move();
+  if(click[0]==true){//turn right
+    bob.turn(8);
+  }
+  if(click[1]==true){//turn left
+    bob.turn(-8);
+  }
+  if (click[2]==true){
+    bob.accelerate(value);
+  }
+}
+
+public void keyReleased(){
+  if(key == 'r'){//turn right
+    click[0]=false;
+  }
+  if(key == 'l'){//turn left
+    click[1]=false;
+  }
+  if (key =='a'){
+    click[2]=false;
+  }
 }
 
 public void keyPressed(){
-  double value =0;
   if(key == 'r'){//turn right
-    bob.turn(8);
+    click[0]=true;
   }
   if(key == 'l'){//turn left
-    bob.turn(-8);
+    click[1]=true;
   }
   if (key =='a'){
-    value+=.2;
-    bob.accelerate(value);
+    click[2]=true;
+    //value+=.01;
   }
   if(key =='h'){
     bob.hyperspace();
