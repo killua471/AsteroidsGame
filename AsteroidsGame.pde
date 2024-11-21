@@ -23,10 +23,10 @@ public void draw()
   bob.show();
   bob.move();
   if(click[0]==true){//turn right
-    bob.turn(8);
+    bob.turn(4);
   }
   if(click[1]==true){//turn left
-    bob.turn(-8);
+    bob.turn(-4);
   }
   if (click[2]==true){
     bob.accelerate(value);
