@@ -1,10 +1,10 @@
 //your variable declarations here
 Spaceship bob;
 ArrayList <Asteroid> a = new ArrayList<Asteroid>();
+ArrayList <Bullet> shots = new ArrayList<Bullet>();
 Star[] sue = new Star[100];
-boolean[] click = new boolean[4];
+boolean[] click = new boolean[5];
 double value=0.1;
-
 public void setup() 
 {
   //your code here
@@ -31,12 +31,62 @@ public void draw()
   bob.show();
   bob.move();
   
+  for(int i=0; i<shots.size(); i++){
+    shots.get(i).show();
+    shots.get(i).move();
+  }
+  
   for(int i =0;i<a.size(); i++){
     if(dist((float)bob.getCenterX(), (float)bob.getCenterY(), (float)a.get(i).getCenterX(), (float)a.get(i).getCenterY()) <20){
       a.remove(i);
       i--;
     }
   }
+  
+  for(int i =0;i<shots.size(); i++){
+    if(shots.size()>0){
+    if((float)shots.get(i).getCenterX() >width)
+    {     
+      shots.remove(i);
+      if(i>0)
+        i--;  
+    }    
+    else if ((float)shots.get(i).getCenterX()<0)
+    {     
+      shots.remove(i);
+      if(i>0)
+        i--;    
+    }    
+    else if((float)shots.get(i).getCenterY() >height)
+    {    
+     shots.remove(i);
+     if(i>0)
+        i--;   
+    } 
+    
+    else if ((float)shots.get(i).getCenterY() < 0)
+    {     
+      shots.remove(i);
+      if(i>0)
+        i--; 
+    }   
+  
+    for(int j =0; j<a.size(); j++){
+      if(shots.size()>0 && dist((float)shots.get(i).getCenterX(), (float)shots.get(i).getCenterY(), (float)a.get(j).getCenterX(), (float)a.get(j).getCenterY()) <20){
+        shots.remove(i);
+        i--;
+        a.remove(j);
+       
+
+        j--;
+        
+        
+        
+        break;
+      }
+    }
+  }
+ }
   
   if(click[0]==true){//turn right
     bob.turn(8);
@@ -47,6 +97,10 @@ public void draw()
   if (click[2]==true){
     bob.accelerate(value);
   }
+  /*
+   if (click[3]==true){
+    shots.add(new Bullet(bob));
+  */
 }
 
 public void keyReleased(){
@@ -59,6 +113,7 @@ public void keyReleased(){
   if (key =='a'){
     click[2]=false;
   }
+
 }
 
 public void keyPressed(){
@@ -74,5 +129,9 @@ public void keyPressed(){
   }
   if(key =='h'){
     bob.hyperspace();
+  }
+  if(key == 's'){
+    //click[3]=true;
+    shots.add(new Bullet(bob));
   }
 }
