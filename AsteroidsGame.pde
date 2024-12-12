@@ -44,39 +44,43 @@ public void draw()
   }
   
   for(int i =0;i<shots.size(); i++){
-    if(shots.size()>0){
+    //if(shots.size()>0){
     if((float)shots.get(i).getCenterX() >width)
     {     
       shots.remove(i);
-      if(i>0)
-        i--;  
+      //if(i>0)
+        i--;
+        break;
     }    
     else if ((float)shots.get(i).getCenterX()<0)
     {     
       shots.remove(i);
-      if(i>0)
+      //if(i>0)
         i--;    
+break;
     }    
     else if((float)shots.get(i).getCenterY() >height)
     {    
      shots.remove(i);
-     if(i>0)
+     //if(i>0)
         i--;   
+break;
     } 
     
     else if ((float)shots.get(i).getCenterY() < 0)
     {     
       shots.remove(i);
-      if(i>0)
+      //if(i>0)
         i--; 
+break;
     }   
   
     for(int j =0; j<a.size(); j++){
       if(shots.size()>0 && dist((float)shots.get(i).getCenterX(), (float)shots.get(i).getCenterY(), (float)a.get(j).getCenterX(), (float)a.get(j).getCenterY()) <20){
         shots.remove(i);
-        i--;
+        //i--;
         a.remove(j);
-       
+       i--;
 
         j--;
         
@@ -84,8 +88,10 @@ public void draw()
         
         break;
       }
-    }
+
+    //}
   }
+
  }
   
   if(click[0]==true){//turn right
