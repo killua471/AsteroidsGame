@@ -5,7 +5,7 @@ class Bullet extends Floater{
     myPointDirection= bob.getPointDirection();
     myXspeed = bob.getXspeed();
     myYspeed = bob.getYspeed();
-    accelerate(0.6);
+    accelerate(6);
     myColor = color(255,10,10);
   }
   public void show(){
