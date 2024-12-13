@@ -35,57 +35,28 @@ public void draw()
     shots.get(i).show();
     shots.get(i).move();
   }
-  
+
+  //spaceship collision with asteroid
   for(int i =0;i<a.size(); i++){
     if(dist((float)bob.getCenterX(), (float)bob.getCenterY(), (float)a.get(i).getCenterX(), (float)a.get(i).getCenterY()) <20){
       a.remove(i);
       i--;
     }
   }
-  
-  for(int i =0;i<shots.size(); i++){
-    //if(shots.size()>0){
-    if((float)shots.get(i).getCenterX() >width)
-    {     
-      shots.remove(i);
-      //if(i>0)
-        i--;
-        break;
-    }    
-    else if ((float)shots.get(i).getCenterX()<0)
-    {     
-      shots.remove(i);
-      //if(i>0)
-        i--;    
-break;
-    }    
-    else if((float)shots.get(i).getCenterY() >height)
-    {    
-     shots.remove(i);
-     //if(i>0)
-        i--;   
-break;
-    } 
-    
-    else if ((float)shots.get(i).getCenterY() < 0)
-    {     
-      shots.remove(i);
-      //if(i>0)
-        i--; 
-break;
-    }   
-  
-    for(int j =0; j<a.size(); j++){
-      if(shots.size()>0 && dist((float)shots.get(i).getCenterX(), (float)shots.get(i).getCenterY(), (float)a.get(j).getCenterX(), (float)a.get(j).getCenterY()) <20){
-        shots.remove(i);
-        //i--;
-        a.remove(j);
-       i--;
 
-        j--;
-        
-        
-        
+  //bullet goes off screen
+  for(int i = shots.size()-1; i>=0; i--){
+    if(shots.get(i).getCenterX>width|| shots.get(i).getCenterX<0 ||shots.get(i).getCenterY>height || shots.get(i).getCenterY <0){
+      shots.remove(i);
+    }
+  }
+
+//bullet collision with asteroid
+  for(int i =shots.size()-1;i>=0; i--){
+    for(int j =a.size(); j>=0; j--){
+      if(dist((float)shots.get(i).getCenterX(), (float)shots.get(i).getCenterY(), (float)a.get(j).getCenterX(), (float)a.get(j).getCenterY()) <20){
+        shots.remove(i);
+        a.remove(j);
         break;
       }
 
