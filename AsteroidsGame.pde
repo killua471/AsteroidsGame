@@ -46,21 +46,21 @@ public void draw()
 
   //bullet goes off screen
   for(int i = shots.size()-1; i>=0; i--){
-    if(shots.get(i).getCenterX>width|| shots.get(i).getCenterX<0 ||shots.get(i).getCenterY>height || shots.get(i).getCenterY <0){
+    if(shots.get(i).getCenterX()>width|| shots.get(i).getCenterX()<0 ||shots.get(i).getCenterY()>height || shots.get(i).getCenterY() <0){
       shots.remove(i);
     }
   }
 
 //bullet collision with asteroid
   for(int i =shots.size()-1;i>=0; i--){
-    for(int j =a.size(); j>=0; j--){
+    for(int j =a.size()-1; j>=0; j--){
       if(dist((float)shots.get(i).getCenterX(), (float)shots.get(i).getCenterY(), (float)a.get(j).getCenterX(), (float)a.get(j).getCenterY()) <20){
         shots.remove(i);
         a.remove(j);
         break;
       }
 
-    //}
+    
   }
 
  }
